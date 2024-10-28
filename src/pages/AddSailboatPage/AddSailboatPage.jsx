@@ -42,7 +42,7 @@ export default function AddSailboatPage() {
       });
       setResponse(res.data);
     } catch (error) {
-      console.error("Error adding sailboat:", error);
+      setResponse(error.response.data);
     }
   };
 

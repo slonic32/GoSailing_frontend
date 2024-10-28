@@ -118,7 +118,6 @@ export default function App() {
       </Suspense>
       <Toaster />
       {loading && <Loader />}
-      {error && <Error />}
     </div>
   );
 }

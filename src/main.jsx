@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter basename="/GoSailing_frontend/">
+        <BrowserRouter basename="/~ahordiyevs/gosailing5/">
           <App />
         </BrowserRouter>
       </PersistGate>

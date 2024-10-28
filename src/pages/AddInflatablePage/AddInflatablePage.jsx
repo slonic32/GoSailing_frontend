@@ -40,7 +40,7 @@ export default function AddInflatablePage() {
       });
       setResponse(res.data);
     } catch (error) {
-      console.error("Error adding inflatable:", error);
+      setResponse(error.response.data);
     }
   };
 

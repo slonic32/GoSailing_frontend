@@ -39,7 +39,7 @@ export default function AddTrailerPage() {
       });
       setResponse(res.data);
     } catch (error) {
-      console.error("Error adding trailer:", error);
+      setResponse(error.response.data);
     }
   };
 

@@ -41,7 +41,7 @@ export default function AddPowerboatPage() {
       });
       setResponse(res.data);
     } catch (error) {
-      console.error("Error adding powerboat:", error);
+      setResponse(error.response.data);
     }
   };
 

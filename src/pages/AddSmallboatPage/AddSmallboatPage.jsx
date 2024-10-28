@@ -37,7 +37,7 @@ export default function AddSmallBoatPage() {
       });
       setResponse(res.data);
     } catch (error) {
-      console.error("Error adding small boat:", error);
+      setResponse(error.response.data);
     }
   };
 

@@ -68,7 +68,6 @@ export default function SignInForm() {
                 placeholder="Enter your password"
                 {...register("password")}
               />
-              <div onClick={() => setShowPassword(!showPassword)}></div>
             </div>
             {errors.password && <p>{errors.password.message}</p>}
           </div>
