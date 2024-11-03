@@ -16,6 +16,7 @@ import AddPowerboatPage from "./pages/AddPowerboatPage/AddPowerboatPage.jsx";
 import AddSmallboatPage from "./pages/AddSmallboatPage/AddSmallboatPage.jsx";
 import AddInflatablePage from "./pages/AddInflatablePage/AddInflatablePage.jsx";
 import VehiclesPage from "./pages/VehiclesPage/VehiclesPage.jsx";
+import VehicleDetail from "./pages/VehicleDetail/VehicleDetail.jsx";
 
 import { useAuth } from "./hooks/useAuth.js";
 
@@ -44,6 +45,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<SharedLayout />}>
             <Route index element={<VehiclesPage />} />
+
+            <Route path="/:id" element={<VehicleDetail />} />
 
             <Route
               path="/signup"
