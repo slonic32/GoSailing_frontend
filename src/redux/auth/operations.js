@@ -4,10 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectRefreshToken } from "./selectors";
 import { updateToken, updateTokenError } from "./slice";
 
-export const BACKEND_HOST = "http:/141.144.239.176:3001/api/";
+//export const BACKEND_HOST = "http:/141.144.239.176:3001/api/";
 //export const BACKEND_HOST = "http://localhost:3000/api/";
 //axios.defaults.baseURL = BACKEND_HOST;
-axios.defaults.baseURL = "http://141.144.239.176:3001/api/";
+//axios.defaults.baseURL = "http://141.144.239.176:3001/api/";
+
+export const BACKEND_HOST =
+  "http:/clabacs.clamv.constructor.university:3000/api/";
+axios.defaults.baseURL =
+  "http://clabacs.clamv.constructor.university:3000/api/";
 
 axios.interceptors.response.use(
   function (response) {
