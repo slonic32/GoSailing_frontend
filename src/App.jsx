@@ -6,7 +6,6 @@ import { selectError, selectLoading } from "./redux/selectors.js";
 import Loader from "./components/Loader/Loader.jsx";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute.jsx";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute.jsx";
-import Error from "./components/Error/Error.jsx";
 import { store } from "./redux/store.js";
 import { Toaster } from "react-hot-toast";
 import SharedLayout from "./pages/SharedLayout/SharedLayout.jsx";
@@ -20,7 +19,6 @@ import VehicleDetail from "./pages/VehicleDetail/VehicleDetail.jsx";
 
 import { useAuth } from "./hooks/useAuth.js";
 
-const HomePage = lazy(() => import("./pages/HomePage/HomePage.jsx"));
 const SignInPage = lazy(() => import("./pages/SignInPage/SignInPage.jsx"));
 const SignUpPage = lazy(() => import("./pages/SignUpPage/SignUpPage.jsx"));
 const LogOut = lazy(() => import("./pages/LogOut/LogOut.jsx"));
