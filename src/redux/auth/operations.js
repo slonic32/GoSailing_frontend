@@ -10,9 +10,9 @@ import { updateToken, updateTokenError } from "./slice";
 //axios.defaults.baseURL = "http://141.144.239.176:3001/api/";
 
 export const BACKEND_HOST =
-  "http:/clabacs.clamv.constructor.university:3000/api/";
+  "http:/clabacs.clamv.constructor.university:3001/api/";
 axios.defaults.baseURL =
-  "http://clabacs.clamv.constructor.university:3000/api/";
+  "http://clabacs.clamv.constructor.university:3001/api/";
 
 axios.interceptors.response.use(
   function (response) {
