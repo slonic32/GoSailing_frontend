@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Autocomplete, TextField, Grid, Button } from "@mui/material";
 
 const SearchFilter = ({ setResults }) => {
   const [filters, setFilters] = useState({
@@ -10,6 +11,9 @@ const SearchFilter = ({ setResults }) => {
     location: "",
     year: "",
   });
+
+  const [locationSuggestions, setLocationSuggestions] = useState([]);
+  const [yearSuggestions, setYearSuggestions] = useState([]);
 
   const handleInputChange = (e) => {
     setFilters({
@@ -40,73 +44,145 @@ const SearchFilter = ({ setResults }) => {
     fetchVehicles();
   }, []);
 
+  const fetchSuggestions = async (query, field, setter) => {
+    try {
+      if (!query.trim()) {
+        setter([]);
+        return;
+      }
+      const response = await axios.get("/ads/autocomplete", {
+        params: { query, field },
+      });
+      setter(response.data.map((item) => item[field]));
+    } catch (error) {
+      console.error(`Error fetching ${field} suggestions:`, error);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        Type:
-        <select name="type" value={filters.type} onChange={handleInputChange}>
-          <option value="">All</option>
-          <option value="Boat">Boat</option>
-          <option value="Trailer">Trailer</option>
-        </select>
-      </label>
+      <Grid container spacing={2} alignItems="center" wrap="nowrap">
+        {/* Type Filter */}
+        <Grid item>
+          <label htmlFor="type">Type:</label>
+          <TextField
+            select
+            id="type"
+            name="type"
+            value={filters.type}
+            onChange={handleInputChange}
+            SelectProps={{ native: true }}
+            size="small"
+            variant="outlined"
+          >
+            <option value="">All</option>
+            <option value="Boat">Boat</option>
+            <option value="Trailer">Trailer</option>
+          </TextField>
+        </Grid>
 
-      <label>
-        Min Price:
-        <input
-          type="number"
-          name="minPrice"
-          value={filters.minPrice}
-          onChange={handleInputChange}
-        />
-      </label>
+        {/* Min Price Filter */}
+        <Grid item>
+          <label htmlFor="minPrice">Min Price:</label>
+          <TextField
+            type="number"
+            id="minPrice"
+            name="minPrice"
+            value={filters.minPrice}
+            onChange={handleInputChange}
+            size="small"
+            variant="outlined"
+          />
+        </Grid>
 
-      <label>
-        Max Price:
-        <input
-          type="number"
-          name="maxPrice"
-          value={filters.maxPrice}
-          onChange={handleInputChange}
-        />
-      </label>
+        {/* Max Price Filter */}
+        <Grid item>
+          <label htmlFor="maxPrice">Max Price:</label>
+          <TextField
+            type="number"
+            id="maxPrice"
+            name="maxPrice"
+            value={filters.maxPrice}
+            onChange={handleInputChange}
+            size="small"
+            variant="outlined"
+          />
+        </Grid>
 
-      <label>
-        Material:
-        <select
-          name="material"
-          value={filters.material}
-          onChange={handleInputChange}
-        >
-          <option value="">All</option>
-          <option value="GRP">GRP</option>
-          <option value="Wood">Wood</option>
-          <option value="Aluminium">Aluminium</option>
-          <option value="Steel">Steel</option>
-        </select>
-      </label>
+        {/* Material Filter */}
+        <Grid item>
+          <label htmlFor="material">Material:</label>
+          <TextField
+            select
+            id="material"
+            name="material"
+            value={filters.material}
+            onChange={handleInputChange}
+            SelectProps={{ native: true }}
+            size="small"
+            variant="outlined"
+          >
+            <option value="">All</option>
+            <option value="GRP">GRP</option>
+            <option value="Wood">Wood</option>
+            <option value="Aluminium">Aluminium</option>
+            <option value="Steel">Steel</option>
+          </TextField>
+        </Grid>
 
-      <label>
-        Location:
-        <input
-          type="text"
-          name="location"
-          value={filters.location}
-          onChange={handleInputChange}
-        />
-      </label>
+        {/* Location Filter with Autocomplete */}
+        <Grid item>
+          <label htmlFor="location">Location:</label>
+          <Autocomplete
+            freeSolo
+            options={locationSuggestions}
+            onInputChange={(e, value) => {
+              setFilters({ ...filters, location: value });
+              fetchSuggestions(value, "location", setLocationSuggestions);
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                id="location"
+                name="location"
+                variant="outlined"
+                size="small"
+                style={{ width: "150px" }} // Compact width
+              />
+            )}
+          />
+        </Grid>
 
-      <label>
-        Year:
-        <input
-          type="number"
-          name="year"
-          value={filters.year}
-          onChange={handleInputChange}
-        />
-      </label>
+        {/* Year Filter with Autocomplete */}
+        <Grid item>
+          <label htmlFor="year">Year:</label>
+          <Autocomplete
+            freeSolo
+            options={yearSuggestions}
+            onInputChange={(e, value) => {
+              setFilters({ ...filters, year: value });
+              fetchSuggestions(value, "year", setYearSuggestions);
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                id="year"
+                name="year"
+                variant="outlined"
+                size="small"
+                style={{ width: "100px" }} // Compact width
+              />
+            )}
+          />
+        </Grid>
 
-      <button type="submit">Search</button>
+        {/* Search Button */}
+        <Grid item>
+          <Button variant="contained" color="primary" type="submit">
+            Search
+          </Button>
+        </Grid>
+      </Grid>
     </form>
   );
 };
