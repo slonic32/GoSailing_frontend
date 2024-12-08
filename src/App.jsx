@@ -23,6 +23,7 @@ const SignInPage = lazy(() => import("./pages/SignInPage/SignInPage.jsx"));
 const SignUpPage = lazy(() => import("./pages/SignUpPage/SignUpPage.jsx"));
 const LogOut = lazy(() => import("./pages/LogOut/LogOut.jsx"));
 const ErrorPage = lazy(() => import("./pages/ErrorPage/ErrorPage.jsx"));
+const Geolocation = lazy(() => import("./pages/Geolocation/Geolocation.jsx"));
 
 export default function App() {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ export default function App() {
             <Route index element={<VehiclesPage />} />
 
             <Route path="/:id" element={<VehicleDetail />} />
+            <Route path="/geolocation" element={<Geolocation />} />
 
             <Route
               path="/signup"

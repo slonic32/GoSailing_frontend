@@ -37,6 +37,9 @@ export default function SharedLayout() {
             <NavLink to="/add-inflatable" className={css.headerLink}>
               Add Inflatable
             </NavLink>
+            <NavLink to="/geolocation" className={css.headerLink}>
+              Geolocation
+            </NavLink>
           </nav>
         </div>
       </header>
