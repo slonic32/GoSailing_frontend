@@ -15,12 +15,10 @@ export default function Geolocation() {
   async function getGeolocation() {
     try {
       const response = await axios.get("/users/geolocation");
-      console.log("geo: ", response.data);
 
       return response.data;
     } catch (error) {
-      console.log("geoerror: ", error);
-      //    console.error("Error fetching geolocation:", error);
+      console.error("Error fetching geolocation:", error);
       return null;
     }
   }
@@ -28,8 +26,10 @@ export default function Geolocation() {
   async function lookupCustomIp() {
     const response = await axios.get(`https://ipinfo.io/${customIp}/geo`);
     const { loc, ip } = response.data;
+
     if (!loc || !ip) {
       setLocation(null);
+      return;
     }
     const [latitude, longitude] = loc.split(",");
     setLocation({ latitude, longitude, ip });
