@@ -5,7 +5,7 @@ import axios from "axios";
 import { BACKEND_HOST } from "../../redux/auth/operations";
 import { Link } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
-axios.defaults.baseURL = BACKEND_HOST;
+//axios.defaults.baseURL = BACKEND_HOST;
 
 export default function Geolocation() {
   const [location, setLocation] = useState(null);
@@ -15,9 +15,12 @@ export default function Geolocation() {
   async function getGeolocation() {
     try {
       const response = await axios.get("/users/geolocation");
+      console.log("geo: ", response.data);
+
       return response.data;
     } catch (error) {
-      console.error("Error fetching geolocation:", error);
+      console.log("geoerror: ", error);
+      //    console.error("Error fetching geolocation:", error);
       return null;
     }
   }
